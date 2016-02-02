@@ -1,510 +1,280 @@
+
 <!DOCTYPE html>
 <html>
 <head lang="en">
     <meta charset="UTF-8">
     <title>Email Generator Tool</title>
     <meta name="Author" content="Mark Onofrio" />
-    <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
+
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
     <link href="css/style.css" type="text/css" rel="stylesheet">
     <link rel="stylesheet prefetch" type="text/css" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
 
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="bower_components/angular.min.js"></script>
-    <script src="bower_components/dist/js/bootstrap.min.js"></script>
-    <script src="bower_components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.min.js"></script>
-    <script src="bower_components/dist/angular-wysiwyg.min.js"></script>
-   <!-- App Controler -->
-    <script type="text/javascript">
+    <script src="bower_components/jquery/dist/jquery.min.js" ></script>
+    <script src="bower_components/angular/angular.min.js" ></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js" ></script>
+    <script src="bower_components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.min.js" ></script>
+    <script src="bower_components/angular-wysiwyg/dist/angular-wysiwyg.min.js" ></script>
 
-        /* Angular */
-        var app = angular.module('app', ['colorpicker.module', 'wysiwyg.module']);
-
-        app.controller('MyCtrl', function($scope) {
-
-            $scope.disabled = false;
-            $scope.menu = [
-                ['bold', 'italic', 'underline'],
-                ['format-block'],
-                ['remove-format'],
-                ['link', 'image'],
-                ['ordered-list', 'unordered-list', 'outdent', 'indent'],
-                ['left-justify', 'center-justify', 'right-justify'],
-                ['css-class'],
-                ['font']
-            ];
-
-            $scope.setDisabled = function() {
-                $scope.disabled = !$scope.disabled;
-            }
-        });
-
-
-        //Jquery function
-
-        $(document).ready(function(){
-            //Add current year to footer
-            $("#year").text( (new Date).getFullYear() );
-
-            //Convio Unsubscribe
-            /*
-             * var unsubscribe = '<convio:choose><convio:when title="Not empty" test="nempty" selected="selected"> <convio:op> <convio:session name="1" param="primary_email"></convio:session> </convio:op> <convio:then><strong> <convio:session name="1" param="primary_email"></convio:session> </strong></convio:then> </convio:when> <convio:otherwise title="Empty"><strong>&nbsp;</strong></convio:otherwise> </convio:choose>';
-             * $("#unsubscribe").append(unsubscribe);
-             */
-
-            /* This will add in the body section.  It first is taken from hidden div to then import into the body.
-             * It will remove the old code if the button is clicked on and then add in the new updated formated text  */
-            var  greetings = '<p id="greetings" style="font-family: Georgia,Calibri,Arial,Helvetica,sans-serif;font-size: 16px;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #505050;line-height: 24px;font-weight: bold;margin-top: 5px;padding-top: 5px;text-align: left;">Dear <convio:choose> <convio:when title="Not empty" test="nempty" selected="selected"> <convio:op> <convio:session name="1" param="first_name"> </convio:session> </convio:op> <convio:then><convio:session name="1" param="first_name"> </convio:session> </convio:then> </convio:when> <convio:otherwise title="Empty">Friend</convio:otherwise></convio:choose>,</p>';
-
-            //Chenge Element Type
-            (function($) {
-                $.fn.changeElementType = function(newType) {
-                    var attrs = {};
-                    $.each(this[0].attributes, function(idx, attr) {
-                        attrs[attr.nodeName] = attr.nodeValue;
-                    });
-                    this.replaceWith(function() {
-                        return $("<" + newType + "/>", attrs).append($(this).contents());
-                    });
-                }
-            })(jQuery);
-
-            //Remove Element
-            (function($) {
-                $.strRemove = function(theTarget, theString) {
-                    return $("<span/>").append(
-                            $(theTarget, theString).remove().end()
-                    ).html();
-                };
-            })(jQuery);
-
-            function cleanUp(){
-                //var changeCSS = [{"font-family": "Georgia,Calibri,Arial,Helvetica,sans-serif","font-size": "16px", "-ms-text-size-adjust": "100%", "color": "#505050", "line-height": "24px", "margin-top": "5px", "padding-top": "5px", "text-align": "left" }];
-
-                //$('p span').unwrap();
-
-               // $(bodyOut).find( "p" ).css({"font-family": "Georgia,Calibri,Arial,Helvetica,sans-serif","font-size": "16px", "-ms-text-size-adjust": "100%", "color": "#505050", "line-height": "24px", "margin-top": "5px", "padding-top": "5px", "text-align": "left" });
-                //$(bodyOut).find( "span" ).css({"font-family": "Georgia,Calibri,Arial,Helvetica,sans-serif","font-size": "16px", "-ms-text-size-adjust": "100%", "color": "#505050", "line-height": "24px", "margin-top": "5px", "padding-top": "5px", "text-align": "left" });
-
-            }
-
-            $('#ADD').on('click', function(){
-
-                var bodyOut = $('#bodyOut');
-                var bodyIn = $('#bodyIn');
-                var somestuff = $(bodyIn).text();
-
-                //$(bodyOut).find("p").contents().unwrap();
-               // var apples = $(bodyOut.innerHTML).find("span").contents().unwrap();
-                //console.log(apples);
-
-                $(bodyOut).contents().remove();
-                $(bodyOut).append(somestuff);
-
-                //console.log(document.getElementById("bodyOut").textContent=document.getElementById("bodyOut").innerHTML);
-
-                /* Adding Greeting */
-                if($('#greeting').is(':checked')){
-                    $('#greetings').remove();
-                    $('#greeting-body').append(greetings);
-                }else{
-                    $('#greetings').remove();
-                }
-
-            });
-            /* End Add */
-
-            //Variables
-            var img_1_cb = $('#image-one-checkbox');
-            //Image One - shows image for first section
-            $(img_1_cb).on('click', function() {
-                //Checks to see if the image checkbox is activated
-                if ($(img_1_cb).is(':checked')) {
-                    $('#ImageOne').show();
-                    $('#image-1-body').append('<table align="right" border="0" cellpadding="0" cellspacing="0" width="200" id="templateSidebar"><tr><td valign="top"><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnCaptionBlock"><tbody class="mcnCaptionBlockOuter"><tr><td class="mcnCaptionBlockInner" valign="top" style="padding:9px;"><table align="right" border="0" cellpadding="0" cellspacing="0" class="mcnCaptionBottomContent" width="false"><tbody><tr><td class="mcnCaptionBottomImageContent" align="center" valign="top" style="padding:0 9px 9px 9px;"><table style="width: 200px;" class="mcpreview-image-uploader" data-mc-id="0"><img class="imageRight" src="http://support.adl.org/images/content/pagebuilder/jonathan-greenblatt-official-300.jpg" style="max-width:200px;" alt="Jonathan Greenblatt" /></table></td></tr><tr><td class="mcnTextContent" valign="top" style="padding: 0 9px; line-height: normal;" width="164"><p></p></td></tr></tbody></table></td></tr></tbody></table></td></tr></table>');
-
-                } else {
-
-                    $('#ImageOne').hide();
-                    $('#templateSidebar').remove();
-                }
-            });
-            //end on-click
-        })
-    </script>
 </head>
-<body ng-app="app">
-<div class="container" ng-controller="MyCtrl">
-    <div class="row">
-        <!-- Form -->
-        <section class="col-xs-5">
-        <form class="col-xs-12">
-            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                <!--  Pre Mobile Header -->
-                <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingOne">
-                        <h4 class="panel-title">
-                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                Pre Mobile Header
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                        <div class="panel-body">
-                            <!-- Pre Mobile Header -->
-                            <div class="form-group">
-                                <label for="preMobile">Pre Mobile Header</label><span style="font-size:.6em;"></span>
-                                <input id="preMobile" class="form-control" type="text" ng-model="preMobile">
+<body ng-app="EmailTempApp">
+<div class="container-fluid" ng-controller="AppCntrl">
+
+    <section class="row" >
+        <header>
+            <div class="col-xs-12">
+                <h1>{{Region.regionName}} Email Template</h1>
+            </div>
+        </header>
+    </section>
+
+    <section class="row"  >
+
+        <div class="col-xs-4">
+            <form ng-init="radio.imageURL='https://secure2.convio.net/adl/images/content/pagebuilder/header-final-NYRO-marketing-email-advocates-with-bg.gif';">
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="flase" aria-controls="collapseOne">Email PreHeader Items
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body">
+                                <div class="title">
+                                    <label name="title">Pre-mobile Header</label>
+                                    <input name="title" id="title" type="text" value="" ng-model="Region.preHeader" style="width: 100%;"/>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- Body Section -->
-                <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingTwo">
-                        <h4 class="panel-title">
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                First Body Section
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                        <div class="panel-body">
-                            <div class="col-xs-12">
-                                <label>Add Body Section 1</label>
-                                <wysiwyg textarea-id="question"
-                                     textarea-class="form-control"
-                                     textarea-height="180px"
-                                     textarea-name="textareaQuestion"
-                                     textarea-required
-                                     ng-model="data.text"
-                                     enable-bootstrap-title="true"
-                                     textarea-menu="menu"
-                                     disabled="disabled">
-                            </wysiwyg>
-                            </div>
-                            <div class="col-xs-12" style="margin-top:7px;">
-                                <div class="col-xs-6">
-                                    <button id="ADD" class="btn btn-info">Add +</button>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingTwo">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    Banner Image
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                            <div class="panel-body">
+                                <!-- Banner -->
+                                <div>
+                                    <div>
+                                        <div ng-repeat="radio in radioData">
+                                            <label for="radio_{{$index}}">
+                                                <input style="display: none;" type="radio" name="radioValue" ng-model="$parent.radioValue" id="radio_{{$index}}" value="{{radio.imageURL}}" />
+                                                <img src="{{radio.imageURL}}" alt="{{radio.name}}" width="200" />
+
+                                            </label>
+                                        </div>
+                                    </div>
+
                                 </div>
-                                <div class="col-xs-6">
-                                    <div class="form-group">
-                                        <div>
-                                            <label for="greeting">
-                                                <input id="greeting" type="checkbox" />
-                                                Add Greetings</label>
-                                        </div>
-                                        <!-- ADD First Image -->
-                                        <div>
-                                            <label for="image-one-checkbox">
-                                                <input type="checkbox" id="image-one-checkbox" />
-                                                Add First Image</label>
-                                        </div>
+                                <!--/EmailTempCtrl-->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingThree">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    Action Image
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <input type="text" id="subject" value="" ng-model="subject" placeholder="SUBJECT" />
+                                        <input type="text" id="actionImage" value="" ng-model="actionImage" placeholder="http:// " />
+                                        <input type="text" id="imageCredit" value="" ng-model="imageCredit" placeholder="Photo Credit" />
+                                        <input type="text" id="imageCopy" value="" ng-model="imageCopy" placeholder="Photo Copy" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <botton class="btn btn-danger" style="display: block;" id="DELETE">Delete Action Image -</botton>
+                                        <button id="ADDimage"class="btn btn-success" style="display: none;">Add Image Back</button>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xs-12" id="ImageOne" style="display:none;">
-                                <div class="form-group" >
-                                    <label for="image_1">Image:
-                                        <input id="image_1" type="radio" value="http://support.adl.org/images/content/pagebuilder/jonathan-greenblatt-official-300.jpg" checked/>
-                                        <img src="http://support.adl.org/images/content/pagebuilder/jonathan-greenblatt-official-300.jpg" width="50" alt=""/>
-                                    </label>
-                                </div>
-                                <div class="form-group">
-                                    <label for="image_other">
-                                        Other Image: </label>
-                                    <input id="image_other" type="text" class="form-control" />
+
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingFour">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                                    Body Copy                               </a>
+                            </h4>
+                        </div>
+                        <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+                            <div class="panel-body" >
+                                <div><label>Body Editor</label></div>
+                                <wysiwyg textarea-id="question"
+                                         textarea-class="form-control"
+                                         textarea-height="180px"
+                                         textarea-name="textareaQuestion"
+                                         textarea-required="true"
+                                         ng-model="data.text"
+                                         enable-bootstrap-title="true"
+                                         textarea-menu="menu"
+                                         disabled="disabled"></wysiwyg>
+                                <div id="bodyIn" style="height:200px; width:200px; display:none; overflow: hidden;"> {{data.text}} </div>
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <button id="ADD" class="btn btn-info">Add +</button>
+
+                                    </div>
                                 </div>
                             </div>
-                            <div id="bodyIn" style="height:200px; width:200px; display:none; overflow: hidden;"> {{data.text}} </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingFive">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                    Convert                               </a>
+                            </h4>
+                        </div>
+                        <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+                            <div class="panel-body" >
+                                <button type="button" id="convert" class="btn btn-default" data-toggle="modal" data-target=".Convert-Modal">Convert</button>
+                                <!--<button id="Select" onclick="selectText('email2')" class="btn btn-success">Highlight Code</button>-->
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Other -->
-                <div class="panel panel-default">
-                    <div class="panel-heading" role="tab" id="headingThree">
-                        <h4 class="panel-title">
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                Collapsible Group Item #3
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                        <div class="panel-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                        </div>
+            </form>
+        </div>
+
+        <div id="emailPreview" class="col-xs-6">
+            <table id="bodyTable" style="border-collapse: collapse; margin: 0px; padding-bottom: 20px; background-color: #dee0e2; height: 100%; width: 100%;" border="0" cellspacing="0" cellpadding="0" width="100%" height="100%">
+                <tbody>
+                <tr>
+                    <td style="border-collapse: collapse; padding: 20px;" align="center" valign="top"><table id="emailContainer" style="border-collapse: collapse; background-color: #ffffff; border: 1px solid #bbbbbb;" border="0" cellspacing="0" cellpadding="0" width="600">
+                        <tbody>
+                        <tr>
+                            <td style="border-collapse: collapse;" align="center" valign="top"><table id="emailHeader" style="border-collapse: collapse;" border="0" cellspacing="0" cellpadding="0" width="100%">
+                                <tbody>
+                                <tr>
+                                    <td style="border-collapse: collapse;" align="center" valign="top">
+                                        <!-- BEGIN PREHEADER // -->
+                                        <table style="border-collapse: collapse;" border="0" cellspacing="0" cellpadding="0" width="100%">
+                                            <tbody>
+                                            <tr>
+                                                <td style="border-collapse: collapse; padding-left: 15px; padding-top:15px;"><table class="subjectLine" style="border-collapse: collapse;" border="0" cellspacing="0" cellpadding="0" width="300" align="left">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td style="border-collapse: collapse;"><p style="font-family: Calibri,Arial,Helvetica,sans-serif; text-decoration: none; text-align: left; font-size: 10px; color: #606060; font-weight: bold; display: block;"><span class="bannerNames">{{Region.preHeader}}</span></p></td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table></td>
+                                                <td style="border-collapse: collapse; padding-right: 15px;;"><table class="HTMLview" style="border-collapse: collapse;" border="0" cellspacing="0" cellpadding="0" width="300" align="right">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td id="outlook" style="border-collapse: collapse;" align="right"><a style="font-family: Calibri,Arial,Helvetica,sans-serif; text-decoration: underline; text-align: right; font-size: 10px; color: #606060; display: block; padding: 0px; font-weight: normal; word-wrap: break-word;" href="http://support.adl.org/site/MessageViewer" target="_blank">View this email in your browser</a></td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <!-- // PREHEADER END -->
+                                        <!-- BEGIN BANNER // -->
+                                        <table id="templateHeader" style="border-collapse: collapse;" border="0" cellspacing="0" cellpadding="0" width="600">
+                                            <tbody>
+                                            <tr>
+                                                <td class="adlImageContent" style="border-collapse: collapse;" valign="middle">
+                                                    <img class="bannerNames" style="border: 0px; line-height: 100%; outline: medium; text-decoration:none;" src="{{radioValue}}" alt="{{name}}" width="600" align="middle">
+                                                </td>
+                                            </tr>
+                                            <tr></tr>
+                                            </tbody>
+                                        </table>
+                                        <table style="border-collapse: collapse;" border="0" cellspacing="0" cellpadding="5" width="100%">
+                                            <tbody>
+                                            <tr>
+                                                <td style="border-collapse: collapse; padding-left:20px; padding-top:10px;" align="left" valign="top"><p style="font-family: Calibri,Arial,Helvetica,sans-serif; text-decoration: none; text-align: left; font-size: 12px; color: #606060; font-weight: bold; display: block;">{{subject}}</p></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <!-- // End BANNER --></td>
+                                </tr>
+                                </tbody>
+                            </table></td>
+                        </tr>
+                        <!-- BEGIN BODY // -->
+                        <tr>
+                            <td style="border-collapse: collapse;" align="center" valign="top">
+                                <table id="emailBody" style="border-collapse: collapse;" border="0" cellspacing="0" cellpadding="0" width="100%">
+                                    <tbody>
+                                    <tr>
+                                        <td style="border-collapse: collapse; padding:10px 20px 10px 20px;" valign="top">
+                                            <!--BODY GOES HERE-->
+                                            <table id="actionImage2" style="border-collapse: collapse;" border="0" cellspacing="0" cellpadding="0" align="right"><tr><td style="border-collapse: collapse; padding-left: 10px;" valign="top" > <table style="border-collapse: collapse; background-color: #D8D8D8; padding:5px;" border="0" cellspacing="0" cellpadding="0"> <tr> <td style="border-collapse: collapse;" valign="top"> <table style="border-collapse: collapse;" border="0" cellspacing="0" cellpadding="0"> <tr> <td style="border-collapse: collapse; padding:8px;" valign="top" > <table style="border-collapse: collapse;" border="0" cellspacing="0" cellpadding="0"> <tr> <td style="border-collapse: collapse; padding-bottom:2px;" valign="top" > <img src="{{actionImage}}" alt="" width="300" /> </td> </tr> <tr> <td style="border-collapse: collapse;" valign="top" > <p style="font-family: Calibri,Arial,Helvetica,sans-serif; text-decoration: none; text-align: left; font-size: 11px; color: #606060; font-weight: bold; display: block;">{{imageCredit}}</p> <p style="font-family: Calibri,Arial,Helvetica,sans-serif; text-decoration: none; text-align: left; font-size: 11px; color: #606060; font-weight: bold; display: block;">{{imageCopy}}</p> </td> </tr> </table> </td> </tr> </table> </td> </tr> </table></td></tr></table>
+                                            <span id="bodyOut"></span>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table></td>
+                        </tr>
+                        <!-- // BODY ENDS -->
+                        <!-- START OF FOOTER -->
+                        <tr>
+                            <td style="border-collapse: collapse;" align="center" valign="top"><table id="emailFooter" style="border-collapse: collapse; font-family: Arial,Helvetica,sans-serif;" border="0" cellspacing="0" cellpadding="0" width="100%">
+                                <tbody>
+                                <tr>
+                                    <td style="border-collapse: collapse; border-top: thin solid #cccccc;" align="center" valign="top"><!-- BEGIN FOOTER // -->
+                                        <table style="border-collapse: collapse;" border="0" cellspacing="0" cellpadding="5">
+                                            <tbody>
+                                            <tr>
+                                                <td style="border-collapse: collapse;" align="center" valign="top">
+
+                                                    <!-- ADD FOOTER CONTENT -->
+
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <!-- // END FOOTER --></td>
+                                </tr>
+                                </tbody>
+                            </table></td>
+                        </tr>
+                        </tbody>
+                    </table></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+        <!-- Large modal -->
+        <div class="modal fade Convert-Modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="row">
+                        <div class="col-xs-12"><button id="Select" onclick="selectText('email2')" class="btn btn-success btn-block">Highlight Code</button></div>
+                        <div class="col-xs-12" style="padding:0 50px;" id="email2" autofocus></div>
                     </div>
                 </div>
             </div>
-        </form>
+        </div>
     </section>
-        <!-- Email Body -->
-        <section class="col-xs-7">
-            <center>
-    <table align="center" border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="bodyTable">
-    <tr>
-    <td align="center" valign="top" id="bodyCell">
-    <!-- BEGIN TEMPLATE // -->
-    <!--[if gte mso 9]>
-    <table align="center" border="0" cellspacing="0" cellpadding="0" width="600" style="width:600px;">
-    <tr>
-    <td align="center" valign="top" width="600" style="width:600px;">
-    <![endif]-->
 
-    <table border="0" cellpadding="0" cellspacing="0" width="100%" class="templateContainer">
-    <!-- Pre-Mobile-->
-    <tr>
-    <td valign="top" id="templatePreheader"><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock">
-    <tbody class="mcnTextBlockOuter">
-    <tr>
-    <td valign="top" class="mcnTextBlockInner">
-
-    <table align="left" border="0" cellpadding="0" cellspacing="0" width="366" class="mcnTextContentContainer">
-    <tbody><tr>
-
-    <td valign="top" class="mcnTextContent" style="padding: 9px 0 9px 18px; line-height: normal;">
-    {{preMobile}}
-    </td>
-    </tr>
-    </tbody></table>
-
-    <table align="right" border="0" cellpadding="0" cellspacing="0" width="197" class="mcnTextContentContainer">
-    <tbody><tr>
-
-    <td valign="top" class="mcnTextContent" style="padding: 9px 18px 9px 0; line-height: normal;">
-
-    <a href="http://support.adl.org/site/MessageViewer" target="_blank">View this email in your browser</a>
-    </td>
-    </tr>
-    </tbody></table>
-
-    </td>
-    </tr>
-    </tbody>
-    </table></td>
-    </tr>
-    <!-- Banner Image -->
-    <tr>
-    <td valign="top" id="templateHeader"><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnImageBlock" style="min-width:100%;">
-    <tbody class="mcnImageBlockOuter">
-    <tr>
-    <td valign="top" style="padding:9px" class="mcnImageBlockInner">
-    <table align="left" width="100%" border="0" cellpadding="0" cellspacing="0" class="mcnImageContentContainer" style="min-width:100%;">
-    <tbody><tr>
-    <td class="mcnImageContent" valign="top" style="padding-right: 9px; padding-left: 9px; padding-top: 0; padding-bottom: 0; text-align:center;">
-
-
-    <img align="center" alt="" src="http://support.adl.org//images/content/pagebuilder/from-the-desk-of-jonathan-greenblatt-2.jpg" width="564" style="max-width:600px; padding-bottom: 0; display: inline !important; vertical-align: bottom;" class="mcnImage">
-
-
-    </td>
-    </tr>
-    </tbody></table>
-    </td>
-    </tr>
-    </tbody>
-    </table></td>
-    </tr>
-    <!-- Body -->
-    <tr>
-    <td valign="top">
-    <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" id="templateColumns">
-    <tr>
-    <td valign="top">
-
-    <table align="left" border="0" cellpadding="0" cellspacing="0" width="600" id="templateBody">
-    <tr>
-    <td>
-    <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock">
-    <tbody class="mcnTextBlockOuter">
-    <tr>
-    <td valign="top" class="mcnTextBlockInner">
-    <table align="left" border="0" cellpadding="0" cellspacing="0" width="600" class="mcnTextContentContainer">
-    <tbody>
-    <tr>
-    <td valign="top" class="mcnTextContent" style="padding: 9px 18px; line-height: normal;">
-
-    <!-- Image right -->
-        <span id="image-1-body"></span>
-    <!--//-->
-    <!--Body -->
-        <span id="greeting-body"></span>
-    <span id="bodyOut"></span>
-    </td>
-    </tr>
-    </tbody>
-    </table>
-    </td>
-    </tr>
-    </tbody>
-    </table>
-    </td>
-    </tr>
-    </table>
-
-
-
-    </td>
-    </tr>
-    </table>
-    </td>
-    </tr>
-    <!-- Footer -->
-    <tr>
-    <td valign="top" id="templateFooter">
-
-    <!-- SM Header -->
-    <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnFollowBlock">
-    <tbody class="mcnFollowBlockOuter">
-    <tr>
-    <td align="center" valign="top" style="padding:9px" class="mcnFollowBlockInner">
-    <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnFollowContentContainer">
-    <tbody><tr>
-    <td align="center">
-    <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnFollowContent">
-    <tbody><tr>
-    <td align="center" valign="top">
-    <table border="0" cellpadding="0" cellspacing="0">
-    <tbody><tr>
-    <td valign="top">
-    <!--[if mso]>
-    <table align="left" border="0" cellspacing="0" cellpadding="0" width="524">
-    <tr>
-    <td align="left" valign="top" width="524">
-    <![endif]-->
-    <strong style="text-align:center">Find Jonathan Greenblatt on:</strong>
-    <!--[if mso]>
-    </td>
-    </tr>
-    </table>
-    <![endif]-->
-    </td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table>
-    <!--SM Links-->
-    <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnFollowBlock">
-    <tbody class="mcnFollowBlockOuter">
-    <tr>
-    <td align="center" valign="top" class="mcnFollowBlockInner">
-    <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnFollowContentContainer">
-    <tbody><tr>
-    <td align="center">
-    <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnFollowContent">
-    <tbody><tr>
-    <td align="center" valign="top">
-    <table border="0" cellpadding="0" cellspacing="0">
-    <tbody><tr>
-    <td valign="top">
-    <!--[if mso]>
-    <table align="left" border="0" cellspacing="0" cellpadding="0" width="524">
-    <tr>
-    <td align="left" valign="top" width="524">
-    <![endif]-->
-
-    <!--Facebook-->
-    <table align="left" border="0" cellpadding="0" cellspacing="0">
-    <tbody><tr>
-    <td valign="top" class="mcnFollowContentItemContainer">
-    <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnFollowContentItem">
-    <tbody><tr>
-    <td align="left" valign="middle">
-    <table align="left" border="0" cellpadding="0" cellspacing="0">
-    <tbody><tr>
-    <td align="center" valign="middle" width="24" style="padding:5px;" class="mcnFollowIconContent">
-
-    <a href="http://www.facebook.com/anti.defamation.league" target="_blank">
-        <img src="http://support.adl.org/SocialMedia/Icons/facebook_32.png" alt="" style="display:block;" height="24" width="24" />
-    </a>
-
-    </td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table>
-    <!--Twitter-->
-    <table align="left" border="0" cellpadding="0" cellspacing="0">
-    <tbody><tr>
-    <td valign="top" class="mcnFollowContentItemContainer">
-    <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnFollowContentItem">
-    <tbody><tr>
-    <td align="left" valign="middle">
-    <table align="left" border="0" cellpadding="0" cellspacing="0">
-    <tbody><tr>
-    <td align="center" valign="middle" width="24" style="padding:5px;" class="mcnFollowIconContent">
-
-    <a href="https://twitter.com/ADL_National" target="_blank">
-    <img src="http://support.adl.org/SocialMedia/Icons/twitter_32.png" alt="" style="display:block;" height="24" width="24" />
-    </a>
-
-    </td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table>
-
-    <!--[if mso]>
-    </td>
-    </tr>
-    </table>
-    <![endif]-->
-    </td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table>
-    <!-- Link Break -->
-    <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnDividerBlock" style="min-width:100%;">
-    <tbody class="mcnDividerBlockOuter">
-    <tr>
-    <td class="mcnDividerBlockInner" style="min-width: 100%; padding: 10px 18px 25px;">
-    <table class="mcnDividerContent" border="0" cellpadding="0" cellspacing="0" width="100%" style="min-width: 100%;border-top-width: 2px;border-top-style: solid;border-top-color: #EEEEEE;">
-    <tbody><tr>
-    <td>
-    <span></span>
-    </td>
-    </tr>
-    </tbody></table>
-    <!--
-    <td class="mcnDividerBlockInner" style="padding: 18px;">
-    <hr class="mcnDividerContent" style="border-bottom-color:none; border-left-color:none; border-right-color:none; border-bottom-width:0; border-left-width:0; border-right-width:0; margin-top:0; margin-right:0; margin-bottom:0; margin-left:0;" />
-    -->
-    </td>
-    </tr>
-    </tbody>
-    </table>
-    <!--Footer-->
-    <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock">
-    <tbody class="mcnTextBlockOuter">
-    <tr>
-    <td valign="top" class="mcnTextBlockInner">
-
-    <table align="left" border="0" cellpadding="0" cellspacing="0" width="600" class="mcnTextContentContainer">
-    <tbody><tr>
-
-    <td valign="top" class="mcnTextContent" style="padding: 9px 18px; line-height: normal;">
-
-    <p>ADL, 605 Third Ave., New York, NY 10158<br /> &copy;<span id="year"></span>
-                                          Anti-Defamation League. All rights reserved.</p>
-                                        <p class="linkMap" dir="ltr">
-                                            <a href="http://www.adl.org/donate" target="_blank">Donate</a> <span> | </span>
-                                            <a href="http://support.adl.org/site/ServiceCenter" target="_blank">Update Your E-mail Preferences</a> <span> | </span>
-                                            <a href="http://support.adl.org/site/PageNavigator/contactus.html" target="_blank">Contact Us</a> <span> | </span>
-                                            <a href="http://www.adl.org/about-adl/privacy-policy.html" target="_blank">Privacy Policy</a>
-                                            <br />
-                                            <br />
-                                        </p>
-                                        <p class="unsubscribe"> <a href="http://support.adl.org/site/CO" target="_blank">Unsubscribe</a>&nbsp;<span id="unsubscribe"></span>&nbsp;from receiving emails.</p>
-    </td>
-    </tr>
-    </tbody></table>
-
-    </td>
-    </tr>
-    </tbody>
-    </table>
-
-    </td>
-    </tr>
-    </table>
-    <!--[if gte mso 9]>
-    </td>
-    </tr>
-    </table>
-    <![endif]-->
-    <!-- // END TEMPLATE -->
-    </td>
-    </tr>
-    </table>
-    </center>
-        </section>
-    </div>
 </div>
+
+<script src="inc/EmailTempApp.min.js"></script>
+<script src="inc/NewYorkRegion.js"></script>
 
 </body>
 </html>
