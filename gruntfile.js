@@ -5,6 +5,7 @@ module.exports = function(grunt) {
     // Do grunt-related things in here
 
     grunt.initConfig({
+        // Move Files into dist folder
         copy: {
             main:{
                 files:[
