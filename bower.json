@@ -1,0 +1,28 @@
+{
+  "name": "ClientSideEmailBuilder",
+  "description": "Client Side Email Buleder using Angular",
+  "main": "",
+  "authors": [
+    "monofrio <onofri04@Gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "Email",
+    "Builder"
+  ],
+  "homepage": "https://github.com/monofrio/ClientSideEmailBuilder",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.9",
+    "angular-wysiwyg": "^1.2.4",
+    "bootstrap": "^3.3.6",
+    "grunt": "^0.4.5"
+  }
+}
