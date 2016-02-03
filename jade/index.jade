@@ -1,0 +1,74 @@
+doctype html
+html(lang="en")
+    head
+        title Client Side Email Builder
+        meta(name="Author" content="Mark Onofrio")
+        script(src='js/jquery.min.js')
+        script(src='js/angular.min.js')
+        script(src='js/angular-wysiwyg.min.js')
+        script(src='js/bootstrap.min.js')
+        script(src='js/bootstrap-colorpicker-module.min.js')
+        script(src='inc/EmailTempApp.min.js' defer)
+
+        link(href="css/bootstrap.min.css", type="text/css", rel="stylesheet")
+    body(ng-app="EmailTempApp")
+        div.container(ng-controller="AppCntrl")
+            section.row
+                header.col-xs-12
+                    h1 Client Side Email Builder for {{Region.regionName}}
+            section.row
+                div.col-xs-6
+                    form
+                        div.panel.panel-group#accordion(role="tablist", aria-multiselectable="true")
+                            //One
+                            div.panel.panel-default
+                                div.panel-heading#headingOne(role="tab")
+                                    h4.panel-title
+                                        a.collapsed(role="button", data-toggle="collapse", data-parent="#accordion" href="#collapseOne", aria-expanded="false", aria-controls="collapseOne") Email PreHeader
+                                div.panel-collapse.collapse.in(role="tabpanel" aria-labelledby="headingOne")
+                                    div.panel-body
+                                        div.title
+                                            label(name="title") Pre-mobile Header
+                                            input#title(name="title", type="text", value="", style="width: 100%;", ng-model="Region.preHeader")
+
+                            //Two
+                            div.panel.panel-default
+                                div.panel-heading#headingTwo(role="tab")
+                                    h4.panel-title
+                                        a.collapsed(role="button", data-toggle="collapse", data-parent="#accordion" href="#collapseTwo", aria-expanded="false", aria-controls="collapseTwo") Banner Image
+                                div.panel-collapse.collapse(role="tabpanel" aria-labelledby="headingTwo")
+                                    div.panel-body
+                                        div.title
+                                            label(for="banner") Banner Image
+                                            input#banner(type="input", value="{{banner}}", ng-model="$parent.radioValue", name="banner")
+                            //Three
+                            div.panel.panel-default
+                                div.panel-heading#headingThree(role="tab")
+                                    h4.panel-title
+                                        a.collapsed(role="button", data-toggle="collapse", data-parent="#accordion" href="#collapseThree", aria-expanded="false", aria-controls="collapseThree") Action Image
+                                div.panel-collapse.collapse(role="tabpanel" aria-labelledby="headingThree")
+                                    div.panel-body
+                                        div.title
+
+                            //Four
+                            div.panel.panel-default
+                                div.panel-heading#headingFour(role="tab")
+                                    h4.panel-title
+                                        a.collapsed(role="button", data-toggle="collapse", data-parent="#accordion" href="#collapseFour", aria-expanded="false", aria-controls="collapseFour") Next
+                                div.panel-collapse.collapse(role="tabpanel" aria-labelledby="headingFour")
+                                    div.panel-body
+                                        div.title
+
+
+
+
+
+                div.col-xs-6
+                    div
+            // Modal
+            div.modal.fade.Convert-Modal(tabindex="-1", role="dialog", aria-labelledby="myLargeModalLabel")
+                div.modal-dialog.modal-lg
+                    div.modal-content
+                        div.col-xs-12
+                            button#Select.btn.btn-success.btn-block(onclick="selectText('email2')") Highlight Code
+                        div.col-xs-12#email2(style="padding:0 50px;", autofocus)

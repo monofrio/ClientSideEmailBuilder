@@ -9,11 +9,14 @@ module.exports = function(grunt) {
         copy: {
             main:{
                 files:[
+                    //HTML
+                    {src: 'jade/index.html', dest: 'dist/', flatten: true, expand:true },
+
                     //JS
                     {src: 'bower_components/angular/angular.min.js', dest: 'dist/js', flatten: true, expand: true },
                     {src: 'bower_components/jquery/dist/jquery.min.js', dest: 'dist/js', flatten: true, expand: true },
                     {src: 'bower_components/bootstrap/dist/js/bootstrap.min.js', dest: 'dist/js', flatten: true, expand: true },
-                    {src: 'bower_components/angular-wysiwyg/dist/angular-wtsiwyg.min.js', dest: 'dist/js', flatten: true, expand: true },
+                    {src: 'bower_components/angular-wysiwyg/dist/angular-wysiwyg.min.js', dest: 'dist/js', flatten: true, expand: true },
                     {src: 'bower_components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.min.js', dest: 'dist/js', flatten: true, expand: true },
 
                     //CSS
@@ -28,4 +31,6 @@ module.exports = function(grunt) {
     });
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.registerTask('default', ['copy']);
+
+    grunt.loadNpmTasks('grunt-readme');
 };
