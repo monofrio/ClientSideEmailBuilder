@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,IAAI;EACF,gBAAgB,EAAE,KAAK",
+"sources": ["temp-style.scss"],
+"names": [],
+"file": "temp-style.css"
+}
