@@ -31,6 +31,4 @@ module.exports = function(grunt) {
     });
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.registerTask('default', ['copy']);
-
-    grunt.loadNpmTasks('grunt-readme');
 };
