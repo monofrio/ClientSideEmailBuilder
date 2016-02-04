@@ -5,7 +5,7 @@ html(lang="en")
         meta(name="Author" content="Mark Onofrio")
         script(src='js/jquery.min.js')
         script(src='js/angular.min.js')
-        script(src='js/src-wysiwyg.min.js')
+        script(src='js/angular-wysiwyg.min.js')
         script(src='js/bootstrap.min.js')
         script(src='js/bootstrap-colorpicker-module.min.js')
         script(src='inc/EmailTempApp.js' defer)
@@ -17,53 +17,76 @@ html(lang="en")
                 header.col-xs-12
                     h1 Client Side Email Builder for {{Region.regionName}}
             section.row
-                div.col-xs-6
-                    form
-                        div.panel.panel-group#accordion(role="tablist", aria-multiselectable="true")
-                            //One
-                            div.panel.panel-default
-                                div.panel-heading#headingOne(role="tab")
-                                    h4.panel-title
-                                        a.collapsed(role="button", data-toggle="collapse", data-parent="#accordion" href="#collapseOne", aria-expanded="false", aria-controls="collapseOne") Email PreHeader
-                                div.panel-collapse.collapse.in(role="tabpanel" aria-labelledby="headingOne")
-                                    div.panel-body
-                                        div.title
-                                            label(name="title") Pre-mobile Header
-                                            input#title(name="title", type="text", value="", style="width: 100%;", ng-model="Region.preHeader")
+                .col-xs-4
+                                form(ng-init="radio.imageURL='https://secure2.convio.net/adl/images/content/pagebuilder/header-final-NYRO-marketing-email-advocates-with-bg.gif';")
+                                    #accordion.panel-group(role='tablist', aria-multiselectable='true')
+                                        .panel.panel-default
+                                            #headingOne.panel-heading(role='tab')
+                                                h4.panel-title
+                                                    a.collapsed(role='button', data-toggle='collapse', data-parent='#accordion', href='#collapseOne', aria-expanded='flase', aria-controls='collapseOne')
+                                                        | Email PreHeader Items
+                                            #collapseOne.panel-collapse.collapse.in(role='tabpanel', aria-labelledby='headingOne')
+                                                .panel-body
+                                                    .title
+                                                        label(name='title') Pre-mobile Header
+                                                        input#title(name='title', type='text', value='', ng-model='Region.preHeader', style='width: 100%;')
+                                        .panel.panel-default
+                                            #headingTwo.panel-heading(role='tab')
+                                                h4.panel-title
+                                                    a.collapsed(role='button', data-toggle='collapse', data-parent='#accordion', href='#collapseTwo', aria-expanded='false', aria-controls='collapseTwo')
+                                                        | Banner Image
+                                            #collapseTwo.panel-collapse.collapse(role='tabpanel', aria-labelledby='headingTwo')
+                                                .panel-body
+                                                    // Banner
+                                                    div
+                                                        div
+                                                            div(ng-repeat='radio in radioData')
+                                                                label(for='radio_{{$index}}')
+                                                                    input(style='display: none;', type='radio', name='radioValue', ng-model='$parent.radioValue', id='radio_{{$index}}', value='{{radio.imageURL}}')
+                                                                    img(src='{{radio.imageURL}}', alt='{{radio.name}}', width='200')
+                                                    // /EmailTempCtrl
+                                        .panel.panel-default
+                                            #headingThree.panel-heading(role='tab')
+                                                h4.panel-title
+                                                    a.collapsed(role='button', data-toggle='collapse', data-parent='#accordion', href='#collapseThree', aria-expanded='false', aria-controls='collapseThree')
+                                                        | Action Image
+                                            #collapseThree.panel-collapse.collapse(role='tabpanel', aria-labelledby='headingThree')
+                                                .panel-body
+                                                    .row
+                                                        .col-xs-12
+                                                            input#subject(type='text', value='', ng-model='subject', placeholder='SUBJECT')
+                                                            input#actionImage(type='text', value='', ng-model='actionImage', placeholder='http:// ')
+                                                            input#imageCredit(type='text', value='', ng-model='imageCredit', placeholder='Photo Credit')
+                                                            input#imageCopy(type='text', value='', ng-model='imageCopy', placeholder='Photo Copy')
+                                                    .row
+                                                        .col-xs-6
+                                                            botton#DELETE.btn.btn-danger(style='display: block;') Delete Action Image -
+                                                            button#ADDimage.btn.btn-success(style='display: none;') Add Image Back
+                                        .panel.panel-default
+                                            #headingFour.panel-heading(role='tab')
+                                                h4.panel-title
+                                                    a.collapsed(role='button', data-toggle='collapse', data-parent='#accordion', href='#collapseFour', aria-expanded='true', aria-controls='collapseFour')
+                                                        | Body Copy
+                                            #collapseFour.panel-collapse.collapse(role='tabpanel', aria-labelledby='headingFour')
+                                                .panel-body
+                                                    div
+                                                        label Body Editor
+                                                    wysiwyg(textarea-id='question', textarea-class='form-control', textarea-height='180px', textarea-name='textareaQuestion', textarea-required='true', ng-model='data.text', enable-bootstrap-title='true', textarea-menu='menu', disabled='disabled')
+                                                    #bodyIn(style='height:200px; width:200px; display:none; overflow: hidden;')  {{data.text}}
+                                                    .row
+                                                        .col-xs-6
+                                                            button#ADD.btn.btn-info Add +
+                                        .panel.panel-default
+                                            #headingFive.panel-heading(role='tab')
+                                                h4.panel-title
+                                                    a.collapsed(role='button', data-toggle='collapse', data-parent='#accordion', href='#collapseFive', aria-expanded='false', aria-controls='collapseFive')
+                                                        | Convert
+                                            #collapseFive.panel-collapse.collapse(role='tabpanel', aria-labelledby='headingFive')
+                                                .panel-body
+                                                    button#convert.btn.btn-default(type='button', data-toggle='modal', data-target='.Convert-Modal') Convert
+                                                    // <button id="Select" onclick="selectText('email2')" class="btn btn-success">Highlight Code</button>
 
-                            //Two
-                            div.panel.panel-default
-                                div.panel-heading#headingTwo(role="tab")
-                                    h4.panel-title
-                                        a.collapsed(role="button", data-toggle="collapse", data-parent="#accordion" href="#collapseTwo", aria-expanded="false", aria-controls="collapseTwo") Banner Image
-                                div.panel-collapse.collapse(role="tabpanel" aria-labelledby="headingTwo")
-                                    div.panel-body
-                                        div.title
-                                            label(for="banner") Banner Image
-                                            input#banner(type="input", value="{{banner}}", ng-model="$parent.radioValue", name="banner")
-                            //Three
-                            div.panel.panel-default
-                                div.panel-heading#headingThree(role="tab")
-                                    h4.panel-title
-                                        a.collapsed(role="button", data-toggle="collapse", data-parent="#accordion" href="#collapseThree", aria-expanded="false", aria-controls="collapseThree") Action Image
-                                div.panel-collapse.collapse(role="tabpanel" aria-labelledby="headingThree")
-                                    div.panel-body
-                                        div.title
-
-                            //Four
-                            div.panel.panel-default
-                                div.panel-heading#headingFour(role="tab")
-                                    h4.panel-title
-                                        a.collapsed(role="button", data-toggle="collapse", data-parent="#accordion" href="#collapseFour", aria-expanded="false", aria-controls="collapseFour") Next
-                                div.panel-collapse.collapse(role="tabpanel" aria-labelledby="headingFour")
-                                    div.panel-body
-                                        div.title
-
-
-
-
-
-                div.col-xs-6
+                .col-xs-6
                     div {{Region.preHeader}}
                         div
                             // build:include templates/email-temp-inline.html
