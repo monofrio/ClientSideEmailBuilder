@@ -9,18 +9,14 @@
 * Bootstrap: 3.3.6
  */
 
-var app = angular.module("EmailTempApp", ['colorpicker.module', 'wysiwyg.module']);
+var app = angular.module("EmailTempApp", []);
 
 app.controller("AppCntrl", ['$scope', '$filter', function ($scope, $filter){
 
-    $scope.radioValue = "radioValue";
 
+    $scope.HTMLview = "http://support.adl.org/site/MessageViewer";
+    $scope.TEXTview = "View this email in your browser!";
     $scope.date = new Date();
     $scope.subject = $filter('date')(new Date(), 'MMMM, y');
-
-    $scope.Region = {
-        regionName: 'New York',
-        preHeader: ''
-    };
 
 }]);

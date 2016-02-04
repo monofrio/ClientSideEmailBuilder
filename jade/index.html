@@ -3,11 +3,11 @@
   <head>
     <title>Client Side Email Builder</title>
     <meta name="Author" content="Mark Onofrio">
-    <script src="js/jquery.min.js"></script>
-    <script src="js/angular.min.js"></script>
-    <script src="js/angular-wysiwyg.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/bootstrap-colorpicker-module.min.js"></script>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/angular.min.js" defer></script>
+    <!--script(src='js/angular-wysiwyg.min.js')e-->
+    <script src="js/bootstrap.min.js" defer></script>
+    <!--script(src='js/bootstrap-colorpicker-module.min.js')-->
     <script src="inc/EmailTempApp.js" defer></script>
     <link href="css/bootstrap.min.css" type="text/css" rel="stylesheet">
   </head>
@@ -20,7 +20,7 @@
       </section>
       <section class="row">
         <div class="col-xs-4">
-          <form ng-init="radio.imageURL='https://secure2.convio.net/adl/images/content/pagebuilder/header-final-NYRO-marketing-email-advocates-with-bg.gif';">
+          <form>
             <div id="accordion" role="tablist" aria-multiselectable="true" class="panel-group">
               <div class="panel panel-default">
                 <div id="headingOne" role="tab" class="panel-heading">
@@ -30,7 +30,7 @@
                   <div class="panel-body">
                     <div class="title">
                       <label name="title">Pre-mobile Header</label>
-                      <input id="title" name="title" type="text" value="" ng-model="Region.preHeader" style="width: 100%;">
+                      <input id="title" name="title" type="text" value="" ng-model="preHeader" style="width: 100%;">
                     </div>
                   </div>
                 </div>
@@ -40,19 +40,7 @@
                   <h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" class="collapsed">Banner Image</a></h4>
                 </div>
                 <div id="collapseTwo" role="tabpanel" aria-labelledby="headingTwo" class="panel-collapse collapse">
-                  <div class="panel-body">
-                    <!-- Banner-->
-                    <div>
-                      <div>
-                        <div ng-repeat="radio in radioData">
-                          <label for="radio_{{$index}}">
-                            <input style="display: none;" type="radio" name="radioValue" ng-model="$parent.radioValue" id="radio_{{$index}}" value="{{radio.imageURL}}"><img src="{{radio.imageURL}}" alt="{{radio.name}}" width="200">
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- /EmailTempCtrl-->
-                  </div>
+                  <div class="panel-body"></div>
                 </div>
               </div>
               <div class="panel panel-default">
@@ -112,8 +100,8 @@
           </form>
         </div>
         <div class="col-xs-6">
-          <div>{{Region.preHeader}}
-            <div>
+          <div>
+            <div id="emailTemp">
               <!-- build:include templates/email-temp-inline.html-->
               <!-- /build-->
             </div>
