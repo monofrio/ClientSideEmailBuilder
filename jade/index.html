@@ -5,10 +5,10 @@
     <meta name="Author" content="Mark Onofrio">
     <script src="js/jquery.min.js"></script>
     <script src="js/angular.min.js"></script>
-    <script src="js/angular-wysiwyg.min.js"></script>
+    <script src="js/src-wysiwyg.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/bootstrap-colorpicker-module.min.js"></script>
-    <script src="inc/EmailTempApp.min.js" defer></script>
+    <script src="inc/EmailTempApp.js" defer></script>
     <link href="css/bootstrap.min.css" type="text/css" rel="stylesheet">
   </head>
   <body ng-app="EmailTempApp">
@@ -76,7 +76,12 @@
           </form>
         </div>
         <div class="col-xs-6">
-          <div></div>
+          <div>{{Region.preHeader}}
+            <div>
+              <!-- build:include templates/email-temp-inline.html-->
+              <!-- /build-->
+            </div>
+          </div>
         </div>
       </section>
       <!-- Modal-->

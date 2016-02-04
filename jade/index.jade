@@ -5,10 +5,10 @@ html(lang="en")
         meta(name="Author" content="Mark Onofrio")
         script(src='js/jquery.min.js')
         script(src='js/angular.min.js')
-        script(src='js/angular-wysiwyg.min.js')
+        script(src='js/src-wysiwyg.min.js')
         script(src='js/bootstrap.min.js')
         script(src='js/bootstrap-colorpicker-module.min.js')
-        script(src='inc/EmailTempApp.min.js' defer)
+        script(src='inc/EmailTempApp.js' defer)
 
         link(href="css/bootstrap.min.css", type="text/css", rel="stylesheet")
     body(ng-app="EmailTempApp")
@@ -64,7 +64,12 @@ html(lang="en")
 
 
                 div.col-xs-6
-                    div
+                    div {{Region.preHeader}}
+                        div
+                            // build:include templates/email-temp-inline.html
+
+                            // /build
+
             // Modal
             div.modal.fade.Convert-Modal(tabindex="-1", role="dialog", aria-labelledby="myLargeModalLabel")
                 div.modal-dialog.modal-lg
