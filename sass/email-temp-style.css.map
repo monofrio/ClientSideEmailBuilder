@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AACE,eAAI;EACF,MAAM,EAAE,eAAe",
+"sources": ["email-temp-style.scss"],
+"names": [],
+"file": "email-temp-style.css"
+}

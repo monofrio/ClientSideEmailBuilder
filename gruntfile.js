@@ -74,8 +74,8 @@ module.exports = function(grunt) {
 
         // Replace all the development CSS files with the distribution
         processhtml: {
+            // 'dist/email.html': ['source_file.html']
             dist: {
-                // 'dist/email.html': ['source_file.html']
                 files: [
                     {'dev/templates/email-temp.html': ['dist/templates/email-temp.html']},
                     {'dev/templates/index.html': ['dist/templates/index.html']}
@@ -83,8 +83,18 @@ module.exports = function(grunt) {
             },
             dev: {
                 files: [
-                    {'dev/templates/email-temp.html': ['dev/templates/email-temp.html']},
+                   // {'dev/templates/email-temp.html': ['dev/templates/email-temp.html']},
                     {'dev/index.html': ['dev/index.html']}
+                ]
+            },
+            email: {
+                files: [
+                    {'dev/templates/email-temp.html': ['jade/email-temp.html']}
+                ]
+            },
+            emailTest: {
+                files: [
+                    {'Test/email-temp.html': ['jade/email-temp.html']}
                 ]
             }
         },
@@ -119,12 +129,17 @@ module.exports = function(grunt) {
     var start = grunt.option('target') || 'start';
     var dev = grunt.option('target') || 'dev';
     var live = grunt.option('target') || 'dist';
+    var email = grunt.option('target') || 'email';
+    var emailTest = grunt.option('target') || 'emailTest';
 
     // Pulls all Bower components to distribution folder
     grunt.registerTask('start', ['copy:' + start ]);
 
     // Inline email to Dev
-    grunt.registerTask('dev', ['copy:' + dev, 'uncss:' + dev, 'processhtml:' + dev, 'premailer:' + dev]);
+    grunt.registerTask('dev', ['copy:' + dev, 'uncss:' + dev, 'processhtml:' + email, 'processhtml:' + dev, 'premailer:' + dev]);
+
+    //Test email
+    grunt.registerTask('emailTest', ['processhtml:' + emailTest]);
 
     // Makes files Live
     grunt.registerTask('live', ['copy:' + live]);

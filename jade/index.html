@@ -30,7 +30,15 @@
                   <div class="panel-body">
                     <div class="title">
                       <label name="title">Pre-mobile Header</label>
-                      <input id="title" name="title" type="text" value="" ng-model="preHeader" style="width: 100%;">
+                      <input id="title" name="title" type="text" value="" ng-model="preHeader" style="width: 100%;" maxlength="70">
+                    </div>
+                    <div class="title">
+                      <label name="textView">HTML View</label>
+                      <input id="textView" name="textView" type="text" value="{{TEXTview}}" ng-model="TEXTview" style="width: 100%;">
+                    </div>
+                    <div class="title">
+                      <label name="htmlView">HTML Text</label>
+                      <input id="htmlView" name="htmlView" type="text" value="{{HTMLview}}" ng-model="HTMLview" style="width: 100%;">
                     </div>
                   </div>
                 </div>
@@ -40,7 +48,12 @@
                   <h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" class="collapsed">Banner Image</a></h4>
                 </div>
                 <div id="collapseTwo" role="tabpanel" aria-labelledby="headingTwo" class="panel-collapse collapse">
-                  <div class="panel-body"></div>
+                  <div class="panel-body">
+                    <div class="title">
+                      <label name="banner">Banner Image</label>
+                      <input id="title" name="title" type="text" value="" ng-model="banner" style="width: 100%;">
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="panel panel-default">

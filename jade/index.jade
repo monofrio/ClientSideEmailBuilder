@@ -29,7 +29,14 @@ html(lang="en")
                                     .panel-body
                                         .title
                                             label(name='title') Pre-mobile Header
-                                            input#title(name='title', type='text', value='', ng-model='preHeader', style='width: 100%;')
+                                            input#title(name='title', type='text', value='', ng-model='preHeader', style='width: 100%;', maxlength='70')
+                                        .title
+                                            label(name='textView') HTML View
+                                            input#textView(name='textView', type='text', value='{{TEXTview}}', ng-model='TEXTview', style='width: 100%;')
+                                        .title
+                                            label(name='htmlView') HTML Text
+                                            input#htmlView(name='htmlView', type='text', value='{{HTMLview}}', ng-model='HTMLview', style='width: 100%;')
+
                             .panel.panel-default
                                 #headingTwo.panel-heading(role='tab')
                                     h4.panel-title
@@ -37,6 +44,9 @@ html(lang="en")
                                             | Banner Image
                                 #collapseTwo.panel-collapse.collapse(role='tabpanel', aria-labelledby='headingTwo')
                                     .panel-body
+                                        .title
+                                            label(name='banner') Banner Image
+                                            input#title(name='title', type='text', value='', ng-model='banner', style='width: 100%;')
 
                             .panel.panel-default
                                 #headingThree.panel-heading(role='tab')
