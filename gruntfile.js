@@ -34,7 +34,9 @@ module.exports = function(grunt) {
                     {src: 'jade/email-temp.html', dest: 'dev/templates/', flatten: true, expand: true},
                     {src: 'sass/email-temp-style.css', dest: 'dev/templates/css', flatten: true, expand: true},
                     {src: 'jade/index.html', dest: 'dev/', flatten: true, expand: true},
-                    {src: 'src/EmailTempApp.js', dest: 'dev/inc', flatten: true, expand: true}
+                    {src: 'src/EmailTempApp.js', dest: 'dev/inc', flatten: true, expand: true},
+                    {src: 'sass/style.css', dest: 'dev/css', flatten: true, expand: true}
+
                 ]
             },
             start: {

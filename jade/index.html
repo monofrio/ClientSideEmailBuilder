@@ -10,6 +10,7 @@
     <!--script(src='js/bootstrap-colorpicker-module.min.js')-->
     <script src="inc/EmailTempApp.js" defer></script>
     <link href="css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <link href="css/style.css" type="text/css" rel="stylesheet">
   </head>
   <body ng-app="EmailTempApp">
     <div ng-controller="AppCntrl" class="container-fluid">
@@ -113,11 +114,9 @@
           </form>
         </div>
         <div class="col-xs-6">
-          <div style="max-width:600px;">
-            <div id="email">
-              <!-- build:include templates/email-temp-inline.html-->
-              <!-- /build-->
-            </div>
+          <div id="emailSection">
+            <!-- build:include templates/email-temp-inline.html-->
+            <!-- /build-->
           </div>
         </div>
       </section>

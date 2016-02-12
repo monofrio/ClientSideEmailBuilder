@@ -11,6 +11,7 @@ html(lang="en")
         script(src='inc/EmailTempApp.js' defer)
 
         link(href="css/bootstrap.min.css", type="text/css", rel="stylesheet")
+        link(href='css/style.css', type='text/css', rel='stylesheet')
     body(ng-app="EmailTempApp")
         div.container-fluid(ng-controller="AppCntrl")
             section.row
@@ -90,11 +91,9 @@ html(lang="en")
                                         // <button id="Select" onclick="selectText('email2')" class="btn btn-success">Highlight Code</button>
 
                 .col-xs-6
-                    div(style='max-width:600px;')
-                        div#email
-                            // build:include templates/email-temp-inline.html
-
-                            // /build
+                    div#emailSection
+                        // build:include templates/email-temp-inline.html
+                        // /build
 
             // Modal
             div.modal.fade.Convert-Modal(tabindex="-1", role="dialog", aria-labelledby="myLargeModalLabel")
