@@ -12,7 +12,7 @@ html(lang="en")
 
         link(href="css/bootstrap.min.css", type="text/css", rel="stylesheet")
     body(ng-app="EmailTempApp")
-        div.container(ng-controller="AppCntrl")
+        div.container-fluid(ng-controller="AppCntrl")
             section.row
                 header.col-xs-12
                     h1 Client Side Email Builder for {{Region.regionName}}
@@ -90,8 +90,8 @@ html(lang="en")
                                         // <button id="Select" onclick="selectText('email2')" class="btn btn-success">Highlight Code</button>
 
                 .col-xs-6
-                    div
-                        div#emailTemp
+                    div(style='max-width:600px;')
+                        div#email
                             // build:include templates/email-temp-inline.html
 
                             // /build

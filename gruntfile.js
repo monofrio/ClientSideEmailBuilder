@@ -51,6 +51,13 @@ module.exports = function(grunt) {
                         //FONTS
                         {src: 'bower_components/bootstrap/dist/fonts/*', dest: 'dev/fonts', flatten: true, expand: true}
                     ]
+            },
+            emailTest: {
+                files: [
+                    {src: 'sass/email-temp-style.css', dest: 'Test/css', flatten: true, expand: true},
+                    {src: 'bower_components/ink/css/ink.css', dest: 'Test/css', flatten: true, expand: true},
+
+                ]
             }
         },
 
@@ -136,10 +143,14 @@ module.exports = function(grunt) {
     grunt.registerTask('start', ['copy:' + start ]);
 
     // Inline email to Dev
-    grunt.registerTask('dev', ['copy:' + dev, 'uncss:' + dev, 'processhtml:' + email, 'processhtml:' + dev, 'premailer:' + dev]);
+  //  grunt.registerTask('dev', ['copy:' + dev, 'uncss:' + dev, 'processhtml:' + email, 'processhtml:' + dev,
+    // 'premailer:' + dev]);
+    grunt.registerTask('dev', ['copy:' + dev, 'processhtml:' + email, 'processhtml:' + dev, 'premailer:' + dev]);
 
     //Test email
-    grunt.registerTask('emailTest', ['processhtml:' + emailTest]);
+   // grunt.registerTask('emailTest', ['processhtml:' + emailTest, 'premailer:' + dev]);
+    grunt.registerTask('emailTest', ['copy:'+emailTest, 'processhtml:' + emailTest]);
+
 
     // Makes files Live
     grunt.registerTask('live', ['copy:' + live]);

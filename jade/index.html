@@ -12,7 +12,7 @@
     <link href="css/bootstrap.min.css" type="text/css" rel="stylesheet">
   </head>
   <body ng-app="EmailTempApp">
-    <div ng-controller="AppCntrl" class="container">
+    <div ng-controller="AppCntrl" class="container-fluid">
       <section class="row">
         <header class="col-xs-12">
           <h1>Client Side Email Builder for {{Region.regionName}}</h1>
@@ -113,8 +113,8 @@
           </form>
         </div>
         <div class="col-xs-6">
-          <div>
-            <div id="emailTemp">
+          <div style="max-width:600px;">
+            <div id="email">
               <!-- build:include templates/email-temp-inline.html-->
               <!-- /build-->
             </div>
