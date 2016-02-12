@@ -3,68 +3,98 @@ html(lang="en")
     head
         title Client Side Email Builder
         meta(name="Author" content="Mark Onofrio")
-        script(src='js/jquery.min.js')
-        script(src='js/angular.min.js')
-        script(src='js/angular-wysiwyg.min.js')
-        script(src='js/bootstrap.min.js')
-        script(src='js/bootstrap-colorpicker-module.min.js')
-        script(src='inc/EmailTempApp.min.js' defer)
+        script(src='js/jquery.min.js' defer)
+        script(src='js/angular.min.js' defer)
+        //script(src='js/angular-wysiwyg.min.js')e
+        script(src='js/bootstrap.min.js' defer)
+        //script(src='js/bootstrap-colorpicker-module.min.js')
+        script(src='inc/EmailTempApp.js' defer)
 
         link(href="css/bootstrap.min.css", type="text/css", rel="stylesheet")
+        link(href='css/style.css', type='text/css', rel='stylesheet')
     body(ng-app="EmailTempApp")
-        div.container(ng-controller="AppCntrl")
+        div.container-fluid(ng-controller="AppCntrl")
             section.row
                 header.col-xs-12
                     h1 Client Side Email Builder for {{Region.regionName}}
             section.row
-                div.col-xs-6
+                .col-xs-4
                     form
-                        div.panel.panel-group#accordion(role="tablist", aria-multiselectable="true")
-                            //One
-                            div.panel.panel-default
-                                div.panel-heading#headingOne(role="tab")
+                        #accordion.panel-group(role='tablist', aria-multiselectable='true')
+                            .panel.panel-default
+                                #headingOne.panel-heading(role='tab')
                                     h4.panel-title
-                                        a.collapsed(role="button", data-toggle="collapse", data-parent="#accordion" href="#collapseOne", aria-expanded="false", aria-controls="collapseOne") Email PreHeader
-                                div.panel-collapse.collapse.in(role="tabpanel" aria-labelledby="headingOne")
-                                    div.panel-body
-                                        div.title
-                                            label(name="title") Pre-mobile Header
-                                            input#title(name="title", type="text", value="", style="width: 100%;", ng-model="Region.preHeader")
+                                        a.collapsed(role='button', data-toggle='collapse', data-parent='#accordion', href='#collapseOne', aria-expanded='flase', aria-controls='collapseOne')
+                                            | Email PreHeader Items
+                                #collapseOne.panel-collapse.collapse.in(role='tabpanel', aria-labelledby='headingOne')
+                                    .panel-body
+                                        .title
+                                            label(name='title') Pre-mobile Header
+                                            input#title(name='title', type='text', value='', ng-model='preHeader', style='width: 100%;', maxlength='70')
+                                        .title
+                                            label(name='textView') HTML View
+                                            input#textView(name='textView', type='text', value='{{TEXTview}}', ng-model='TEXTview', style='width: 100%;')
+                                        .title
+                                            label(name='htmlView') HTML Text
+                                            input#htmlView(name='htmlView', type='text', value='{{HTMLview}}', ng-model='HTMLview', style='width: 100%;')
 
-                            //Two
-                            div.panel.panel-default
-                                div.panel-heading#headingTwo(role="tab")
+                            .panel.panel-default
+                                #headingTwo.panel-heading(role='tab')
                                     h4.panel-title
-                                        a.collapsed(role="button", data-toggle="collapse", data-parent="#accordion" href="#collapseTwo", aria-expanded="false", aria-controls="collapseTwo") Banner Image
-                                div.panel-collapse.collapse(role="tabpanel" aria-labelledby="headingTwo")
-                                    div.panel-body
-                                        div.title
-                                            label(for="banner") Banner Image
-                                            input#banner(type="input", value="{{banner}}", ng-model="$parent.radioValue", name="banner")
-                            //Three
-                            div.panel.panel-default
-                                div.panel-heading#headingThree(role="tab")
+                                        a.collapsed(role='button', data-toggle='collapse', data-parent='#accordion', href='#collapseTwo', aria-expanded='false', aria-controls='collapseTwo')
+                                            | Banner Image
+                                #collapseTwo.panel-collapse.collapse(role='tabpanel', aria-labelledby='headingTwo')
+                                    .panel-body
+                                        .title
+                                            label(name='banner') Banner Image
+                                            input#title(name='title', type='text', value='', ng-model='banner', style='width: 100%;')
+
+                            .panel.panel-default
+                                #headingThree.panel-heading(role='tab')
                                     h4.panel-title
-                                        a.collapsed(role="button", data-toggle="collapse", data-parent="#accordion" href="#collapseThree", aria-expanded="false", aria-controls="collapseThree") Action Image
-                                div.panel-collapse.collapse(role="tabpanel" aria-labelledby="headingThree")
-                                    div.panel-body
-                                        div.title
-
-                            //Four
-                            div.panel.panel-default
-                                div.panel-heading#headingFour(role="tab")
+                                        a.collapsed(role='button', data-toggle='collapse', data-parent='#accordion', href='#collapseThree', aria-expanded='false', aria-controls='collapseThree')
+                                            | Action Image
+                                #collapseThree.panel-collapse.collapse(role='tabpanel', aria-labelledby='headingThree')
+                                    .panel-body
+                                        .row
+                                            .col-xs-12
+                                                input#subject(type='text', value='', ng-model='subject', placeholder='SUBJECT')
+                                                input#actionImage(type='text', value='', ng-model='actionImage', placeholder='http:// ')
+                                                input#imageCredit(type='text', value='', ng-model='imageCredit', placeholder='Photo Credit')
+                                                input#imageCopy(type='text', value='', ng-model='imageCopy', placeholder='Photo Copy')
+                                        .row
+                                            .col-xs-6
+                                                botton#DELETE.btn.btn-danger(style='display: block;') Delete Action Image -
+                                                button#ADDimage.btn.btn-success(style='display: none;') Add Image Back
+                            .panel.panel-default
+                                #headingFour.panel-heading(role='tab')
                                     h4.panel-title
-                                        a.collapsed(role="button", data-toggle="collapse", data-parent="#accordion" href="#collapseFour", aria-expanded="false", aria-controls="collapseFour") Next
-                                div.panel-collapse.collapse(role="tabpanel" aria-labelledby="headingFour")
-                                    div.panel-body
-                                        div.title
+                                        a.collapsed(role='button', data-toggle='collapse', data-parent='#accordion', href='#collapseFour', aria-expanded='true', aria-controls='collapseFour')
+                                            | Body Copy
+                                #collapseFour.panel-collapse.collapse(role='tabpanel', aria-labelledby='headingFour')
+                                    .panel-body
+                                        div
+                                            label Body Editor
+                                        wysiwyg(textarea-id='question', textarea-class='form-control', textarea-height='180px', textarea-name='textareaQuestion', textarea-required='true', ng-model='data.text', enable-bootstrap-title='true', textarea-menu='menu', disabled='disabled')
+                                        #bodyIn(style='height:200px; width:200px; display:none; overflow: hidden;')  {{data.text}}
+                                        .row
+                                            .col-xs-6
+                                                button#ADD.btn.btn-info Add +
+                            .panel.panel-default
+                                #headingFive.panel-heading(role='tab')
+                                    h4.panel-title
+                                        a.collapsed(role='button', data-toggle='collapse', data-parent='#accordion', href='#collapseFive', aria-expanded='false', aria-controls='collapseFive')
+                                            | Convert
+                                #collapseFive.panel-collapse.collapse(role='tabpanel', aria-labelledby='headingFive')
+                                    .panel-body
+                                        button#convert.btn.btn-default(type='button', data-toggle='modal', data-target='.Convert-Modal') Convert
+                                        // <button id="Select" onclick="selectText('email2')" class="btn btn-success">Highlight Code</button>
 
+                .col-xs-6
+                    div#emailSection
+                        // build:include templates/email-temp-inline.html
+                        // /build
 
-
-
-
-                div.col-xs-6
-                    div
             // Modal
             div.modal.fade.Convert-Modal(tabindex="-1", role="dialog", aria-labelledby="myLargeModalLabel")
                 div.modal-dialog.modal-lg

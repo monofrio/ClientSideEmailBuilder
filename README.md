@@ -6,6 +6,7 @@
 > This is in **Pre-alpha**
 
 This is designed to create simple email development tool for users with no experience with HTML.
+<<<<<<< Updated upstream
 Also set up to create email templates using Jade, Sass, Ink and Grunt.
 
 My challenge is to create an application that doesn't rely on a server but can be used on the client side browser.
@@ -73,4 +74,14 @@ this will pull your email templet assets together so it can be inlined
 grunt inline
 ```
 
+<<<<<<< Updated upstream
 this will inline your css 
+=======
+
+## Getting Started
+
+If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins.
+>>>>>>> Stashed changes
+=======
+this will inline your css
+>>>>>>> Stashed changes

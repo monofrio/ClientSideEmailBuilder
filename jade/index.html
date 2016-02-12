@@ -3,72 +3,110 @@
   <head>
     <title>Client Side Email Builder</title>
     <meta name="Author" content="Mark Onofrio">
-    <script src="js/jquery.min.js"></script>
-    <script src="js/angular.min.js"></script>
-    <script src="js/angular-wysiwyg.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/bootstrap-colorpicker-module.min.js"></script>
-    <script src="inc/EmailTempApp.min.js" defer></script>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/angular.min.js" defer></script>
+    <!--script(src='js/angular-wysiwyg.min.js')e-->
+    <script src="js/bootstrap.min.js" defer></script>
+    <!--script(src='js/bootstrap-colorpicker-module.min.js')-->
+    <script src="inc/EmailTempApp.js" defer></script>
     <link href="css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <link href="css/style.css" type="text/css" rel="stylesheet">
   </head>
   <body ng-app="EmailTempApp">
-    <div ng-controller="AppCntrl" class="container">
+    <div ng-controller="AppCntrl" class="container-fluid">
       <section class="row">
         <header class="col-xs-12">
           <h1>Client Side Email Builder for {{Region.regionName}}</h1>
         </header>
       </section>
       <section class="row">
-        <div class="col-xs-6">
+        <div class="col-xs-4">
           <form>
-            <div id="accordion" role="tablist" aria-multiselectable="true" class="panel panel-group">
-              <!--One-->
+            <div id="accordion" role="tablist" aria-multiselectable="true" class="panel-group">
               <div class="panel panel-default">
                 <div id="headingOne" role="tab" class="panel-heading">
-                  <h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class="collapsed">Email PreHeader</a></h4>
+                  <h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="flase" aria-controls="collapseOne" class="collapsed">Email PreHeader Items</a></h4>
                 </div>
-                <div role="tabpanel" aria-labelledby="headingOne" class="panel-collapse collapse in">
+                <div id="collapseOne" role="tabpanel" aria-labelledby="headingOne" class="panel-collapse collapse in">
                   <div class="panel-body">
                     <div class="title">
                       <label name="title">Pre-mobile Header</label>
-                      <input id="title" name="title" type="text" value="" style="width: 100%;" ng-model="Region.preHeader">
+                      <input id="title" name="title" type="text" value="" ng-model="preHeader" style="width: 100%;" maxlength="70">
+                    </div>
+                    <div class="title">
+                      <label name="textView">HTML View</label>
+                      <input id="textView" name="textView" type="text" value="{{TEXTview}}" ng-model="TEXTview" style="width: 100%;">
+                    </div>
+                    <div class="title">
+                      <label name="htmlView">HTML Text</label>
+                      <input id="htmlView" name="htmlView" type="text" value="{{HTMLview}}" ng-model="HTMLview" style="width: 100%;">
                     </div>
                   </div>
                 </div>
               </div>
-              <!--Two-->
               <div class="panel panel-default">
                 <div id="headingTwo" role="tab" class="panel-heading">
                   <h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" class="collapsed">Banner Image</a></h4>
                 </div>
-                <div role="tabpanel" aria-labelledby="headingTwo" class="panel-collapse collapse">
+                <div id="collapseTwo" role="tabpanel" aria-labelledby="headingTwo" class="panel-collapse collapse">
                   <div class="panel-body">
                     <div class="title">
-                      <label for="banner">Banner Image</label>
-                      <input id="banner" type="input" value="{{banner}}" ng-model="$parent.radioValue" name="banner">
+                      <label name="banner">Banner Image</label>
+                      <input id="title" name="title" type="text" value="" ng-model="banner" style="width: 100%;">
                     </div>
                   </div>
                 </div>
               </div>
-              <!--Three-->
               <div class="panel panel-default">
                 <div id="headingThree" role="tab" class="panel-heading">
                   <h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree" class="collapsed">Action Image</a></h4>
                 </div>
-                <div role="tabpanel" aria-labelledby="headingThree" class="panel-collapse collapse">
+                <div id="collapseThree" role="tabpanel" aria-labelledby="headingThree" class="panel-collapse collapse">
                   <div class="panel-body">
-                    <div class="title"></div>
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <input id="subject" type="text" value="" ng-model="subject" placeholder="SUBJECT">
+                        <input id="actionImage" type="text" value="" ng-model="actionImage" placeholder="http:// ">
+                        <input id="imageCredit" type="text" value="" ng-model="imageCredit" placeholder="Photo Credit">
+                        <input id="imageCopy" type="text" value="" ng-model="imageCopy" placeholder="Photo Copy">
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-xs-6">
+                        <botton id="DELETE" style="display: block;" class="btn btn-danger">Delete Action Image -</botton>
+                        <button id="ADDimage" style="display: none;" class="btn btn-success">Add Image Back</button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-              <!--Four-->
               <div class="panel panel-default">
                 <div id="headingFour" role="tab" class="panel-heading">
-                  <h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour" class="collapsed">Next</a></h4>
+                  <h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="true" aria-controls="collapseFour" class="collapsed">Body Copy</a></h4>
                 </div>
-                <div role="tabpanel" aria-labelledby="headingFour" class="panel-collapse collapse">
+                <div id="collapseFour" role="tabpanel" aria-labelledby="headingFour" class="panel-collapse collapse">
                   <div class="panel-body">
-                    <div class="title"></div>
+                    <div>
+                      <label>Body Editor</label>
+                    </div>
+                    <wysiwyg textarea-id="question" textarea-class="form-control" textarea-height="180px" textarea-name="textareaQuestion" textarea-required="true" ng-model="data.text" enable-bootstrap-title="true" textarea-menu="menu" disabled="disabled"></wysiwyg>
+                    <div id="bodyIn" style="height:200px; width:200px; display:none; overflow: hidden;"> {{data.text}}</div>
+                    <div class="row">
+                      <div class="col-xs-6">
+                        <button id="ADD" class="btn btn-info">Add +</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div id="headingFive" role="tab" class="panel-heading">
+                  <h4 class="panel-title"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive" class="collapsed">Convert</a></h4>
+                </div>
+                <div id="collapseFive" role="tabpanel" aria-labelledby="headingFive" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    <button id="convert" type="button" data-toggle="modal" data-target=".Convert-Modal" class="btn btn-default">Convert</button>
+                    <!-- <button id="Select" onclick="selectText('email2')" class="btn btn-success">Highlight Code</button>-->
                   </div>
                 </div>
               </div>
@@ -76,7 +114,10 @@
           </form>
         </div>
         <div class="col-xs-6">
-          <div></div>
+          <div id="emailSection">
+            <!-- build:include templates/email-temp-inline.html-->
+            <!-- /build-->
+          </div>
         </div>
       </section>
       <!-- Modal-->
