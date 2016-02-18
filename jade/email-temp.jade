@@ -1,6 +1,6 @@
-// build:include email-temp-inc-head.html
-// /build
-table#emailTemp.body(border="0", cellpadding="0", cellspacing="0", align="center", width="100%")
+include email-temp-inc-head
+body
+    table#emailTemp.body(border="0", cellpadding="0", cellspacing="0", align="center", width="100%")
         tr
             td.center(align='center', valign='top')
                 center
@@ -12,16 +12,12 @@ table#emailTemp.body(border="0", cellpadding="0", cellspacing="0", align="center
                                         td
                                             table.row
                                                 tr#preHeader
-                                                    // build:include email-temp-preheader.html
+                                                    include email-temp-preheader
 
-                                                    // /build
                                             table.row
                                                 tr#emailHeader
-                                                    // build:include email-temp-header.html
+                                                    include email-temp-header
 
-                                                    // /build
                                             table.row
                                                 tr#emailBody
-                                                    // build:include email-temp-body.html
-
-                                                    // /build
+                                                    include email-temp-body

@@ -1,11 +1,10 @@
 doctype strict
-head
-    title Email Title
-    meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
-    meta(name='viewport', content='width=device-width')
-
-    // build:css /css/tidy.css
-    link(rel='stylesheet', href='css/ink.css')
-    link(rel='stylesheet', href='css/email-temp-style.css')
-    // /build
-body
+html(xmlns="http://www.w3.org/1999/xhtml")
+    head
+        title= pageTitle
+        meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
+        meta(name='viewport', content='width=device-width')
+        // build:css /css/tidy.css
+        link(rel='stylesheet', href='css/ink.css')
+        link(rel='stylesheet', href='css/email-temp-style.css')
+        // /build

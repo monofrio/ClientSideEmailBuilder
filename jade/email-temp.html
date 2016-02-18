@@ -1,41 +1,103 @@
-
-<!-- build:include email-temp-inc-head.html-->
-<!-- /build-->
-<table id="emailTemp" border="0" cellpadding="0" cellspacing="0" align="center" width="100%" class="body">
-  <tr>
-    <td align="center" valign="top" class="center">
-      <center>
-        <table border="0" cellspacing="0" cellpadding="0" width="100%">
-          <tbody>
-            <tr>
-              <table class="container">
-                <tr>
-                  <td>
-                    <table class="row">
-                      <tr id="preHeader">
-                        <!-- build:include email-temp-preheader.html-->
-                        <!-- /build-->
-                      </tr>
-                    </table>
-                    <table class="row">
-                      <tr id="emailHeader">
-                        <!-- build:include email-temp-header.html-->
-                        <!-- /build-->
-                      </tr>
-                    </table>
-                    <table class="row">
-                      <tr id="emailBody">
-                        <!-- build:include email-temp-body.html-->
-                        <!-- /build-->
-                      </tr>
-                    </table>
-                  </td>
-                </tr>
-              </table>
-            </tr>
-          </tbody>
-        </table>
-      </center>
-    </td>
-  </tr>
-</table>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width"/>
+    <!-- build:css /css/tidy.css-->
+    <link rel="stylesheet" href="css/ink.css"/>
+    <link rel="stylesheet" href="css/email-temp-style.css"/>
+    <!-- /build-->
+  </head>
+</html>
+<body>
+  <table id="emailTemp" border="0" cellpadding="0" cellspacing="0" align="center" width="100%" class="body">
+    <tr>
+      <td align="center" valign="top" class="center">
+        <center>
+          <table border="0" cellspacing="0" cellpadding="0" width="100%">
+            <tbody>
+              <tr>
+                <table class="container">
+                  <tr>
+                    <td>
+                      <table class="row">
+                        <tr id="preHeader">
+                          <!-- Preheader-->
+                          <td class="wrapper">
+                            <table class="six columns">
+                              <tr>
+                                <td>
+                                  <table border="0" cellspacing="0" cellpadding="0" width="300" align="left" class="subjectLine">
+                                    <tbody>
+                                      <tr>
+                                        <td><span class="preHeader">{{preHeader}}</span></td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </td>
+                              </tr>
+                            </table>
+                          </td>
+                          <td class="wrapper last">
+                            <table class="six colums">
+                              <tr>
+                                <td>
+                                  <table border="0" cellspacing="0" cellpadding="0" width="300" align="right" class="HTMLview">
+                                    <tbody>
+                                      <tr>
+                                        <td id="outlook" align="right"><a href="{{HTMLview}}" target="_blank">{{TEXTview}}</a></td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </table>
+                      <table class="row">
+                        <tr id="emailHeader">
+                          <!-- Header-->
+                          <table class="row">
+                            <tr>
+                              <td class="wrapper last">
+                                <table class="twelve colums">
+                                  <tr>
+                                    <td><img src="{{headerImage}}" class="image"/></td>
+                                  </tr>
+                                </table>
+                              </td>
+                            </tr>
+                          </table>
+                        </tr>
+                      </table>
+                      <table class="row">
+                        <tr id="emailBody">
+                          <!-- Body-->
+                          <table class="row">
+                            <tr>
+                              <td class="wrapper last">
+                                <table class="twelve colums">
+                                  <tr>
+                                    <td>
+                                      <p>Hello World</p>
+                                    </td>
+                                  </tr>
+                                </table>
+                              </td>
+                            </tr>
+                          </table>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+              </tr>
+            </tbody>
+          </table>
+        </center>
+      </td>
+    </tr>
+  </table>
+</body>

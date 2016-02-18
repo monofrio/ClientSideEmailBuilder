@@ -1,12 +1,3 @@
-/* Preview style updates */
-#emailSection {
-  border: solid 1px black; }
-  #emailSection .container {
-    border: solid thin black; }
-  #emailSection table .row {
-    padding: 5px !important;
-    margin: 0; }
-    #emailSection table .row .container .row {
-      display: block !important; }
+
 
 /*# sourceMappingURL=style.css.map */

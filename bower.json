@@ -19,10 +19,7 @@
     "tests"
   ],
   "dependencies": {
-    "angular-bootstrap-colorpicker": ">= 3.0.0",
-    "angular-wysiwyg": "^1.2.4",
     "bootstrap": "^3.3.6",
-    "grunt": "^0.4.5",
     "ink": "^1.0.5"
   }
 }

@@ -1,4 +1,4 @@
-# Client Side Email Generator for Convio
+# Client Side Email Generator
 
 [![Build Status](https://travis-ci.org/monofrio/ClientSideEmailBuilder.svg?branch=Master)](https://travis-ci
 .org/monofrio/ClientSideEmailBuilder)
@@ -14,26 +14,34 @@ Also this application will need to work on the clientside without using a server
 Whats being used for this project:
 
 * [Bootstrap](http://getbootstrap.com/)
+* [Grunt](http://gruntjs.com/)
 * [Ink](http://foundation.zurb.com/emails.html)
 * [Jade](http://jade-lang.com/)
 * [jQuery](http://jquery.com/)
-* New - [React](https://facebook.github.io/react/index.html)
+* [React](https://facebook.github.io/react/index.html)
 * [Sass](http://sass-lang.com/)
-
-Other
-* New - [Gulp](http://gulpjs.com/)
-* [Git](https://git-scm.com/)
-* [Node.js](https://nodejs.org/en/)
-* [NPM](https://www.npmjs.com/)
-
-will no longer be in use
-* ~~[Angular](https://angularjs.org/)~~
-    * ~~[Angular Wysiwyg](https://github.com/TerryMooreII/angular-wysiwyg)~~
-    * ~~[Angular Bootstrap Colorpicker](https://github.com/buberdds/angular-bootstrap-colorpicker)~~
-* ~~[Bower](http://bower.io/)~~
-* ~~[Grunt](http://gruntjs.com/)~~
 
 ## Getting Started
 
 ### Node.js
 You will need to install [Node.js](https://nodejs.org/en/) which will also install [NPM (Node Package Manager)](https://www.npmjs.com/).
+
+Also need to have bower installed:
+```
+$ npm install -g bower
+```
+
+This will install the dependencys from NPM
+```
+$ npm install
+```
+
+This will install the dependencys from Bower
+```
+$ bower install
+```
+
+This will start the projects by setting up the developemt folder for testing
+```
+$ grunt start
+```
